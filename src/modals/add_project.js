@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form, Input } from "antd";
+import { Modal, Button, Form, Input, DatePicker } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 export default function ModalAddProject() {
@@ -26,22 +26,27 @@ export default function ModalAddProject() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
   return (
     <>
       <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>
-        Add Project
+        Thêm dự án
       </Button>
       <Modal
-        title="Create a new project"
+        title="Thêm mới dự án"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
           <Button onClick={handleCancel} danger type="primary">
-            Cancel
+            Hủy bỏ
           </Button>,
           <Button key="submit" type="primary" htmlType="submit" form="myForm">
-            Submit
+            Lưu kết quả
           </Button>,
         ]}
       >
@@ -56,11 +61,32 @@ export default function ModalAddProject() {
           form={form}
         >
           <Form.Item
-            label="Project Name"
+            label="Tên dự án"
             name="project_name"
-            rules={[{ required: true, message: "Please input project name!" }]}
+            rules={[{ required: true, message: "Hãy nhập tên dự án của bạn!" }]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item
+            label="Tags"
+            name="tag"
+            rules={[
+              { required: true, message: "Hãy nhập tag để nhận diện dự án!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Deadline"
+            name="deadline"
+            rules={[
+              {
+                required: true,
+                message: "Hãy nhập thời hạn kết thúc dự án!",
+              },
+            ]}
+          >
+            <DatePicker onChange={onChange} />
           </Form.Item>
         </Form>
       </Modal>

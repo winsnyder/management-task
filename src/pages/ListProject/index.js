@@ -112,7 +112,7 @@ export default function ListProject() {
   return (
     <div className="container__wrapper">
       <div className="list__project__header">
-        <h3>List Projects Personal</h3>
+        <h3>Danh Sách Dự Án Cá Nhân</h3>
       </div>
       <div className="list__project__filter"></div>
       <div className="list__project__content">
@@ -120,7 +120,7 @@ export default function ListProject() {
           <ModalAddProject />
           <Search
             style={{ width: 500, float: "right" }}
-            placeholder="Search projecdt with project name or hashtag"
+            placeholder="Tìm kiếm dự án bằng tên dự án hoặc tag,..."
             onSearch={onSearch}
             enterButton
             allowClear

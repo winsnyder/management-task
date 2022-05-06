@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import { DoubleLeftOutlined } from "@ant-design/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "react-trello";
@@ -9,14 +10,24 @@ export default function BoardView() {
   return (
     <div className="container__wrapper">
       <div className="list__project__header">
-        <h3>List Tasks Of Project</h3>
+        <h3>Danh Sách Trạng Thái Các Task Của Dự Án</h3>
       </div>
       <div style={{ paddingLeft: 20, paddingBottom: 20 }}>
-        <Button type="primary" onClick={() => navigate("/")}>
-          Back to Projects
+        <Button
+          type="primary"
+          onClick={() => navigate("/")}
+          icon={<DoubleLeftOutlined />}
+        >
+          Quay lại danh sách dự án
         </Button>
       </div>
-      <Board style={{ width: "100%", minHeight: 500}} data={MOCK_DATA_BOARD} draggable editable canAddLanes />
+      <Board
+        style={{ width: "100%", minHeight: 500 }}
+        data={MOCK_DATA_BOARD}
+        draggable
+        editable
+        canAddLanes
+      />
     </div>
   );
 }
