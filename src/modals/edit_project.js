@@ -1,27 +1,36 @@
 import React from "react";
 import { Modal, Button, Form, Input, DatePicker } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { projectApi } from "../services/project";
 import BaseContext from "../hooks";
 
-export default function ModalAddProject() {
+export default function ModalEditProject(props) {
   const baseCtx = React.useContext(BaseContext);
   const [form] = Form.useForm();
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+  const [isModalVisible, setIsModalVisible] = React.useState(props.isShow);
+  const dateFormat = "YYYY/MM/DD";
 
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
+    baseCtx.changeIsShowEdit(false);
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const response = await projectApi.get(parseInt(props.id), "");
+        form.setFieldsValue({
+          project_name: response.data.results.project_name,
+          tag: response.data.results.tag,
+          deadline: moment(response.data.results.deadline),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    // eslint-disable-next-line
+  }, []);
 
   const onFinish = async (values) => {
     console.log("Success:", moment(values.deadline).format("YYYY-MM-DD"));
@@ -30,7 +39,8 @@ export default function ModalAddProject() {
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjUxODc1NTQ5fQ.0rKmiJqQymIR_GyjEfmtFy3nC8_bux94f0H1sNfLpwg";
 
     try {
-      const reponse = await projectApi.add(
+      const reponse = await projectApi.update(
+        parseInt(props.id),
         JSON.stringify({
           project_name: values.project_name,
           tag: values.tag,
@@ -39,10 +49,11 @@ export default function ModalAddProject() {
         token
       );
 
-      if (reponse.data.statusCode === 201) {
+      if (reponse.data.statusCode === 200) {
         baseCtx.changeReload();
         setIsModalVisible(false);
         form.resetFields();
+        baseCtx.changeIsShowEdit(false);
       }
     } catch (error) {
       console.log(error);
@@ -55,13 +66,9 @@ export default function ModalAddProject() {
 
   return (
     <>
-      <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>
-        Thêm dự án
-      </Button>
       <Modal
-        title="Thêm mới dự án"
+        title="Sửa thông tin dự án"
         visible={isModalVisible}
-        onOk={handleOk}
         onCancel={handleCancel}
         footer={[
           <Button onClick={handleCancel} danger type="primary">
@@ -108,7 +115,7 @@ export default function ModalAddProject() {
               },
             ]}
           >
-            <DatePicker />
+            <DatePicker format={dateFormat} />
           </Form.Item>
         </Form>
       </Modal>

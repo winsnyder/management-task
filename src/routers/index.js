@@ -9,7 +9,7 @@ export default function RouterSystem() {
     <Routes>
       <Route element={<Login />} path="/login" />
       <Route element={<ListProject />} path="/" />
-      <Route element={<BoardView />} path="/board" />
+      <Route element={<BoardView />} path="/board/:projectId" />
     </Routes>
   );
 }
