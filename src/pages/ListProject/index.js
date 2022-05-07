@@ -36,8 +36,7 @@ export default function ListProject() {
   const getDataFetch = async (params) => {
     setSpinning(true);
     // const token = sessionStorage.getItem("token");
-    const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjUxODc1NTQ5fQ.0rKmiJqQymIR_GyjEfmtFy3nC8_bux94f0H1sNfLpwg";
+    const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/login");
     }
@@ -101,7 +100,7 @@ export default function ListProject() {
                   <b>{data[i].deadline}</b>
                 )}
               </h4>
-              <div className="list__units">
+              {/* <div className="list__units">
                 <div className="unit">
                   <FireOutlined /> To Do (15)
                 </div>
@@ -114,7 +113,7 @@ export default function ListProject() {
                 <div className="unit">
                   <FireOutlined /> Done (15)
                 </div>
-              </div>
+              </div> */}
             </Card>
           </Col>
         );
@@ -157,7 +156,7 @@ export default function ListProject() {
                   <b>{data[i].deadline}</b>
                 )}
               </h4>
-              <div className="list__units">
+              {/* <div className="list__units">
                 <div className="unit">
                   <FireOutlined /> To Do (15)
                 </div>
@@ -170,7 +169,7 @@ export default function ListProject() {
                 <div className="unit">
                   <FireOutlined /> To Do (15)
                 </div>
-              </div>
+              </div> */}
             </Card>
           </Col>
         );

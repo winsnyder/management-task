@@ -31,9 +31,7 @@ export default function BoardView() {
   }
 
   const handleOnDatachange = (newData) => {
-    const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjUxODc1NTQ5fQ.0rKmiJqQymIR_GyjEfmtFy3nC8_bux94f0H1sNfLpwg";
-    (async () => {
+    const token = sessionStorage.getItem("token")(async () => {
       try {
         const response = await taskApi.update(
           parseInt(projectId),
@@ -42,6 +40,7 @@ export default function BoardView() {
           }),
           token
         );
+        console.log(response);
       } catch (error) {
         console.log(error);
       }

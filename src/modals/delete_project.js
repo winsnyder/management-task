@@ -9,12 +9,11 @@ export default function ModalDeleteProject(props) {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    baseCtx.changeIsShow(false)
+    baseCtx.changeIsShow(false);
   };
 
   const onFinish = async () => {
-    const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjUxODc1NTQ5fQ.0rKmiJqQymIR_GyjEfmtFy3nC8_bux94f0H1sNfLpwg";
+    const token = sessionStorage.getItem("token");
 
     try {
       const reponse = await projectApi.remove(parseInt(props.id), token);
@@ -22,7 +21,7 @@ export default function ModalDeleteProject(props) {
       if (reponse.status === 204) {
         baseCtx.changeReload();
         setIsModalVisible(false);
-        baseCtx.changeIsShow(false)
+        baseCtx.changeIsShow(false);
       }
     } catch (error) {
       console.log(error);

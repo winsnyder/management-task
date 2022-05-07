@@ -1,0 +1,13 @@
+.wrapper-form {
+  position: relative;
+  top: 100px;
+  width: 400px;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 5px 25px;
+  border-radius: 15px;
+}
+
+.wrapper-form button {
+  margin-right: 15px;
+}

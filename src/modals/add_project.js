@@ -26,8 +26,7 @@ export default function ModalAddProject() {
   const onFinish = async (values) => {
     console.log("Success:", moment(values.deadline).format("YYYY-MM-DD"));
 
-    const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjUxODc1NTQ5fQ.0rKmiJqQymIR_GyjEfmtFy3nC8_bux94f0H1sNfLpwg";
+    const token = sessionStorage.getItem("token")
 
     try {
       const reponse = await projectApi.add(

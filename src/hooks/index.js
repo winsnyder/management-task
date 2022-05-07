@@ -11,12 +11,17 @@ const BaseContext = createContext({
 
   isShowEdit: false,
   changeIsShowEdit: () => {},
+
+  // manage switch tab
+  tab: "1",
+  changeTab: () => {},
 });
 
 export function BaseContextProvider(props) {
   const [reload, setReload] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [isShowEdit, setIsShowEdit] = useState(false);
+  const [tab, setTab] = useState(1);
 
   // handle change status
   const handleChangeReload = () => {
@@ -32,6 +37,11 @@ export function BaseContextProvider(props) {
     return setIsShowEdit(isShowEdit);
   };
 
+  // handle switch tab
+  const handleChangeTab = (tab) => {
+    return setTab(tab);
+  };
+
   const context = {
     // reload
     reload: reload,
@@ -44,6 +54,10 @@ export function BaseContextProvider(props) {
     // switch tab
     isShowEdit: isShowEdit,
     changeIsShowEdit: handleChangeIsShowEdit,
+
+    // switch tab
+    tab: tab,
+    changeTab: handleChangeTab,
   };
   return (
     <BaseContext.Provider value={context}>
