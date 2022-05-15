@@ -13,7 +13,7 @@ export default function ModalDeleteProject(props) {
   };
 
   const onFinish = async () => {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token") || "";
 
     try {
       const reponse = await projectApi.remove(parseInt(props.id), token);

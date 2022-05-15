@@ -4,12 +4,9 @@ import ModalAddProject from "../../modals/add_project";
 import ModalDeleteProject from "../../modals/delete_project";
 import ModalEditProject from "../../modals/edit_project";
 import { Card, Col, Row, Input, Spin, Divider } from "antd";
-import {
-  FireOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+
+import InfoDrawer from "../../drawer/info";
 
 import "../../assets/css/listProject.css";
 
@@ -36,7 +33,7 @@ export default function ListProject() {
   const getDataFetch = async (params) => {
     setSpinning(true);
     // const token = sessionStorage.getItem("token");
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token") || "";
     if (!token) {
       navigate("/login");
     }
@@ -66,6 +63,7 @@ export default function ListProject() {
           <Col span={6} key={i}>
             <Card
               title={<b>{data[i].project_name}</b>}
+              extra={<InfoDrawer project_id={data[i].id}/>}
               bordered={false}
               actions={[
                 <DeleteOutlined
@@ -122,6 +120,7 @@ export default function ListProject() {
           <Col span={6} key={i}>
             <Card
               title={<b>{data[i].project_name}</b>}
+              extra={<InfoDrawer project_id={data[i].id}/>}
               bordered={false}
               actions={[
                 <DeleteOutlined

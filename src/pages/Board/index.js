@@ -31,7 +31,8 @@ export default function BoardView() {
   }
 
   const handleOnDatachange = (newData) => {
-    const token = sessionStorage.getItem("token")(async () => {
+    const token = sessionStorage.getItem("token") || "";
+    (async () => {
       try {
         const response = await taskApi.update(
           parseInt(projectId),
